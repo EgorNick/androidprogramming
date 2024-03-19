@@ -1,22 +1,27 @@
 package com.example.notetoself;
-import androidx.fragment.app.DialogFragment;
+
 import android.app.Dialog;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
-import android.view.View;
+
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 
 
-public class DialogNewNote extends DialogFragment {
+public class DialogShowNote extends DialogFragment {
+
+    private Note mNote;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        // All the rest of the code goes here
+        // All the other code goes here
+        // All the other code goes here
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity());
 
@@ -24,56 +29,56 @@ public class DialogNewNote extends DialogFragment {
                 getActivity().getLayoutInflater();
 
         View dialogView =
-                inflater.inflate(R.layout.dialog_new_note, null);
+                inflater.inflate(R.layout.dialog_show_note, null);
 
-        final EditText editTitle = dialogView.findViewById(R.id.editTitle);
-        final EditText editDescription = dialogView.findViewById(R.id.editDescription);
-        final CheckBox checkBoxIdea = dialogView.findViewById(R.id.checkBoxIdea);
-        final CheckBox checkBoxTodo = dialogView.findViewById(R.id.checkBoxTodo);
-        final CheckBox checkBoxImportant = dialogView.findViewById(R.id.checkBoxImportant);
-        Button btnCancel =  dialogView.findViewById(R.id.btnCancel);
+        TextView txtTitle =
+                dialogView.findViewById(R.id.txtTitle);
+
+        TextView txtDescription =
+                dialogView.findViewById(R.id.txtDescription);
+
+        txtTitle.setText(mNote.getTitle());
+        txtDescription.setText(mNote.getDescription());
+
+        TextView txtImportant =
+                dialogView.findViewById(R.id.textViewImportant);
+
+        TextView txtTodo =
+                dialogView.findViewById(R.id.textViewTodo);
+
+        TextView txtIdea =
+                dialogView.findViewById(R.id.textViewIdea);
+
+        if (!mNote.isImportant()){
+            txtImportant.setVisibility(View.GONE);
+        }
+
+        if (!mNote.isTodo()){
+            txtTodo.setVisibility(View.GONE);
+        }
+
+        if (!mNote.isIdea()){
+            txtIdea.setVisibility(View.GONE);
+        }
+
         Button btnOK = dialogView.findViewById(R.id.btnOK);
 
-        builder.setView(dialogView).setMessage("Add a new note");
-
-
-        btnCancel.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        builder.setView(dialogView).setMessage("Your Note");
 
         btnOK.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-                Note newNote = new Note();
-
-                newNote.setTitle(editTitle.
-                        getText().toString());
-
-                newNote.setDescription(editDescription.
-                        getText().toString());
-
-                newNote.setIdea(checkBoxIdea.isChecked());
-                newNote.setTodo(checkBoxTodo.isChecked());
-                newNote.setImportant(checkBoxImportant.
-                        isChecked());
-
-                MainActivity callingActivity = (
-                        MainActivity) getActivity();
-
-                callingActivity.createNewNote(newNote);
-
                 dismiss();
             }
         });
 
         return builder.create();
-
-
-
     }
+
+
+    // Receive a note from the MainActivity
+    public void sendNoteSelected(Note noteSelected) {
+        mNote = noteSelected;
+    }
+
 }
