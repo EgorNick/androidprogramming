@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Заметки</string>
+    <string name="action_settings">Настройки</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Сдедующее</string>
+    <string name="previous">Назадs</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="action_add">Добавить</string>
+    <string name="title_hint">Заголовок</string>
+    <string name="description_hint">Описание</string>
+    <string name="idea_text">Идея</string>
+    <string name="important_text">Важное</string>
+    <string name="todo_text">Сделать</string>
+    <string name="cancel_button">Назадl</string>
+    <string name="ok_button">OK</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="theme_title">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+
+</resources>
